@@ -10,13 +10,13 @@ AS              = msp430-elf-gcc -mmcu=${CPU} -c
 all:lcdToy.elf lcd_testing.elf
 
 #additional rules for files
-lcdToy.elf: ${COMMON_OBJECTS} wakedemo.o wdt_handler.o switch_interrupt_handler-s.o switch-init-s.o
+lcdToy.elf: ${COMMON_OBJECTS} main.o wdt_handler.o switch_interrupt_handler-s.o switch-init-s.o maze_data.o maze_draw.o player.o switches.o stateMachines.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
-lcd_testing.elf: ${COMMON_OBJECTS} lcd_testing.o maze_draw.o maze_data.o
+lcd_testing.elf: ${COMMON_OBJECTS} lcd_testing.o maze_draw.o maze_data.o player.o 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd
 
-load: wakedemo.elf
+load: lcdToy.elf
 	msp430loader.sh $^
 
 load_lcd_t: lcd_testing.elf
