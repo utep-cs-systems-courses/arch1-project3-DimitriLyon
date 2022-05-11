@@ -14,10 +14,28 @@ main()
   lcd_init();
   u_char width = screenWidth, height = screenHeight;
 
-  clearScreen(COLOR_BLUE);
+  clearScreen(COLOR_AQUAMARINE);
 
-  drawString5x7(20,20, "hello", COLOR_GREEN, COLOR_RED);
+  u_char row = 20;
+  u_char col = 40;
+  
+  for (char i = 0; i < 60; i++) {
+    drawPixel(col, row, 0x000f);
+    row++;
+    if (i % 2 == 0) {
+      col++;
+    }
+  }
 
-  fillRectangle(30,30, 60, 60, COLOR_ORANGE);
+  for (u_char i = 0; i < 30; i++) {
+    drawPixel(col, row, COLOR_RED);
+    row++;
+    col--;
+  }
+
+  for (u_char i = 0; i < 90; i++) {
+    drawPixel(col, row, COLOR_RED);
+    row--;
+  }
   
 }
